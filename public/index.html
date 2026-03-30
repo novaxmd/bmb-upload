@@ -6,7 +6,6 @@
   <meta name="description" content="GitHub File Manager - Modern interface for managing files on GitHub">
   <title>GITHUB CDN</title>
   <link rel="icon" href="https://telegra.ph/file/c2a4d8d65722553da4c89.jpg">
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -23,7 +22,6 @@
       --warning: #f59e0b;
     }
 
-    /* Light mode variables */
     [data-theme="light"] {
       --dark: #f1f5f9;
       --dark-light: #ffffff;
@@ -46,7 +44,6 @@
       overflow-x: hidden;
     }
 
-    /* Sidebar */
     .sidebar {
       width: 280px;
       background-color: var(--dark-light);
@@ -133,7 +130,6 @@
       font-size: 1.1rem;
     }
 
-    /* Main Content */
     .main-content {
       flex: 1;
       min-height: 100vh;
@@ -143,7 +139,6 @@
       width: 100%;
     }
 
-    /* Header */
     .header {
       display: flex;
       justify-content: space-between;
@@ -198,7 +193,6 @@
       transition: all 0.2s ease;
     }
 
-    /* Content */
     .content {
       padding: 1.5rem;
       flex: 1;
@@ -207,7 +201,6 @@
       margin: 0 auto;
     }
 
-    /* Card */
     .card {
       background-color: var(--dark-light);
       border-radius: 1rem;
@@ -225,7 +218,6 @@
       color: var(--light);
     }
 
-    /* Upload Form */
     .upload-area {
       border: 2px dashed var(--gray);
       border-radius: 1rem;
@@ -309,7 +301,6 @@
       cursor: not-allowed;
     }
 
-    /* Delete Form */
     .delete-form {
       display: flex;
       flex-direction: column;
@@ -343,7 +334,6 @@
       border-color: var(--primary);
     }
 
-    /* Result */
     .result {
       margin-top: 2rem;
       padding: 1.5rem;
@@ -392,19 +382,6 @@
       color: white;
     }
 
-    /* Turnstile */
-    .cf-turnstile-container {
-      margin: 1.5rem auto;
-      display: flex;
-      justify-content: center;
-    }
-
-    .cf-turnstile {
-      transform: scale(0.9);
-      transform-origin: center;
-    }
-
-    /* Footer */
     .footer {
       text-align: center;
       padding: 1.5rem;
@@ -428,7 +405,6 @@
       text-decoration: underline;
     }
 
-    /* Responsive */
     @media (min-width: 992px) {
       .sidebar {
         transform: translateX(0);
@@ -472,7 +448,6 @@
       }
     }
 
-    /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -482,7 +457,6 @@
       animation: fadeIn 0.3s ease forwards;
     }
 
-    /* Page transitions */
     .page {
       display: none;
     }
@@ -491,7 +465,6 @@
       display: block;
     }
 
-    /* Overlay for mobile sidebar */
     .sidebar-overlay {
       position: fixed;
       top: 0;
@@ -512,10 +485,8 @@
   </style>
 </head>
 <body data-theme="dark">
-  <!-- Sidebar Overlay -->
   <div class="sidebar-overlay"></div>
 
-  <!-- Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-header">
       <div class="logo-container">
@@ -542,9 +513,7 @@
     </ul>
   </aside>
 
-  <!-- Main Content -->
   <main class="main-content">
-    <!-- Header -->
     <header class="header">
       <div class="header-left">
         <button class="menu-toggle" aria-label="Toggle menu">
@@ -560,9 +529,7 @@
       </div>
     </header>
 
-    <!-- Content -->
     <div class="content">
-      <!-- Upload Page -->
       <div class="page active" id="upload-page">
         <div class="card fade-in">
           <h2 class="card-title">Upload New File</h2>
@@ -576,10 +543,7 @@
             <p class="file-name" id="file-name"></p>
             <p class="file-size" id="file-size"></p>
           </div>
-          <div class="cf-turnstile-container">
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAACG14-gG1mTTkPkp" data-callback="onTurnstileSuccess" data-theme="dark"></div>
-          </div>
-          <button class="submit-btn" id="submit-btn" disabled>Upload File</button>
+          <button class="submit-btn" id="submit-btn">Upload File</button>
         </div>
 
         <div class="result" id="result">
@@ -589,7 +553,6 @@
         </div>
       </div>
 
-      <!-- Delete Page -->
       <div class="page" id="delete-page">
         <div class="card fade-in">
           <h2 class="card-title">Delete File</h2>
@@ -598,10 +561,7 @@
               <label for="filename" class="form-label">File Path</label>
               <input type="text" id="filename" class="form-input" placeholder="image/example.jpg" required>
             </div>
-            <div class="cf-turnstile-container">
-              <div class="cf-turnstile" data-sitekey="0x4AAAAAABAFw6YmZiCTI8D9" data-callback="onTurnstileSuccess" data-theme="dark"></div>
-            </div>
-            <button type="submit" class="submit-btn" id="delete-btn" disabled>Delete File</button>
+            <button type="submit" class="submit-btn" id="delete-btn">Delete File</button>
           </form>
         </div>
 
@@ -647,9 +607,6 @@
     const deleteResultTitle = document.getElementById('delete-result-title');
     const deleteResultMsg = document.getElementById('delete-result-message');
 
-    let turnstileResponse = null;
-    let turnstileWidgets = [];
-
     function toggleTheme() {
       const currentTheme = body.getAttribute('data-theme');
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -658,20 +615,6 @@
       
       const icon = themeToggle.querySelector('i');
       icon.className = newTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-      
-      // Update Turnstile theme without re-rendering
-      if (window.turnstile) {
-        turnstileWidgets.forEach(widget => {
-          const iframe = widget.container.querySelector('iframe');
-          if (iframe) {
-            iframe.contentWindow.postMessage({
-              event: 'turnstile.theme',
-              theme: newTheme,
-              widgetId: widget.id
-            }, 'https://challenges.cloudflare.com');
-          }
-        });
-      }
     }
 
     function setInitialTheme() {
@@ -732,7 +675,7 @@
             color: body.getAttribute('data-theme') === 'light' ? '#0f172a' : 'white'
           });
         } else {
-          submitBtn.disabled = !turnstileResponse;
+          submitBtn.disabled = false;
         }
       }
     });
@@ -757,57 +700,23 @@
       }
     });
 
-    function onTurnstileSuccess(token) {
-      turnstileResponse = token;
-      submitBtn.disabled = !(fileInput.files.length && fileInput.files[0].size <= 50 * 1024 * 1024);
-      deleteBtn.disabled = false;
-    }
-
-    function resetTurnstile() {
-      turnstileResponse = null;
-      submitBtn.disabled = true;
-      deleteBtn.disabled = true;
-      
-      // Only reset the current page's Turnstile widget
-      const currentPage = document.querySelector('.page.active');
-      const widgetContainer = currentPage.querySelector('.cf-turnstile');
-      if (widgetContainer && window.turnstile) {
-        widgetContainer.innerHTML = '';
-        const sitekey = widgetContainer.getAttribute('data-sitekey');
-        const theme = body.getAttribute('data-theme');
-        
-        const widgetId = window.turnstile.render(widgetContainer, {
-          sitekey: sitekey,
-          theme: theme,
-          callback: onTurnstileSuccess
-        });
-        
-        // Update the widget reference
-        const widgetIndex = turnstileWidgets.findIndex(w => w.container === widgetContainer);
-        if (widgetIndex !== -1) {
-          turnstileWidgets[widgetIndex].id = widgetId;
-        }
-      }
-    }
-
     submitBtn.addEventListener('click', async (e) => {
       e.preventDefault();
-      
-      if (!turnstileResponse) {
+
+      const file = fileInput.files[0];
+      if (!file) {
         Swal.fire({
-          title: 'CAPTCHA Required',
-          text: 'Please complete the CAPTCHA',
-          icon: 'error',
+          title: 'No File Selected',
+          text: 'Please select a file to upload',
+          icon: 'warning',
           background: body.getAttribute('data-theme') === 'light' ? 'white' : '#1e293b',
           color: body.getAttribute('data-theme') === 'light' ? '#0f172a' : 'white'
         });
         return;
       }
 
-      const file = fileInput.files[0];
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('turnstileResponse', turnstileResponse);
 
       const loadingAlert = Swal.fire({
         title: 'Uploading...',
@@ -846,9 +755,9 @@
             color: body.getAttribute('data-theme') === 'light' ? '#0f172a' : 'white'
           });
           
-          resetTurnstile();
           fileInput.value = '';
           fileInfo.classList.remove('active');
+          submitBtn.disabled = true;
         } else {
           throw new Error(result.error || 'Upload failed');
         }
@@ -866,10 +775,6 @@
           background: body.getAttribute('data-theme') === 'light' ? 'white' : '#1e293b',
           color: body.getAttribute('data-theme') === 'light' ? '#0f172a' : 'white'
         });
-        
-        if (error.message.includes('CAPTCHA')) {
-          resetTurnstile();
-        }
       }
     });
 
@@ -887,17 +792,6 @@
 
     deleteForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
-      if (!turnstileResponse) {
-        Swal.fire({
-          title: 'CAPTCHA Required',
-          text: 'Please complete the CAPTCHA',
-          icon: 'error',
-          background: body.getAttribute('data-theme') === 'light' ? 'white' : '#1e293b',
-          color: body.getAttribute('data-theme') === 'light' ? '#0f172a' : 'white'
-        });
-        return;
-      }
 
       const filename = filenameInput.value.trim();
       if (!filename) {
@@ -928,8 +822,7 @@
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            filename: filename,
-            turnstileResponse: turnstileResponse
+            filename: filename
           })
         });
 
@@ -950,7 +843,6 @@
             color: body.getAttribute('data-theme') === 'light' ? '#0f172a' : 'white'
           });
           
-          resetTurnstile();
           filenameInput.value = '';
         } else {
           throw new Error(result.error || 'Deletion failed');
@@ -969,38 +861,12 @@
           background: body.getAttribute('data-theme') === 'light' ? 'white' : '#1e293b',
           color: body.getAttribute('data-theme') === 'light' ? '#0f172a' : 'white'
         });
-        
-        if (error.message.includes('CAPTCHA')) {
-          resetTurnstile();
-        }
       }
     });
 
     document.addEventListener('DOMContentLoaded', () => {
       setInitialTheme();
       themeToggle.addEventListener('click', toggleTheme);
-      
-      // Initialize Turnstile widgets only once
-      const turnstileContainers = document.querySelectorAll('.cf-turnstile');
-      turnstileContainers.forEach(container => {
-        const sitekey = container.getAttribute('data-sitekey');
-        const theme = body.getAttribute('data-theme');
-        
-        // Only render if not already rendered
-        if (!container.hasChildNodes()) {
-          const widgetId = window.turnstile?.render(container, {
-            sitekey: sitekey,
-            theme: theme,
-            callback: onTurnstileSuccess
-          });
-          
-          turnstileWidgets.push({
-            container: container,
-            sitekey: sitekey,
-            id: widgetId
-          });
-        }
-      });
       
       setTimeout(() => {
         document.querySelector('.card').classList.add('fade-in');
