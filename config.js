@@ -9,7 +9,7 @@ module.exports = {
   githubApiUrl: process.env.GITHUB_API_URL || 'https://api.github.com', // Maintain this
   cdnApiUrl: process.env.CDN_API_URL || 'https://cdn.jsdelivr.net/gh', // Maintain this
   cfTurnstileApiUrl: process.env.CF_TURNSTILE_API_URL || "https://challenges.cloudflare.com", // Mintain this
-  cfSecretKey: process.env.CF_TURNSTILE_SECRET_KEY || '', // Use yours
+  cfSecretKey: process.env.CF_TURNSTILE_SECRET_KEY || '0x4AAAAAACyKoqk3ZYrgHN4aFxldvAnPf48', // Use yours
   githubToken: process.env.GITHUB_TOKEN || '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', // Your Github Token Here
   imageMimetypes: process.env.IMAGE_MIMETYPES || "['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml', 'image/avif', 'image/heif', 'image/heic', 'image/x-icon', 'image/tiff']",
   audioMimetypes: process.env.AUDIO_MIMETYPES || "['audio/mp3', 'audio/mp4', 'audio/mpeg', 'audio/wav', 'audio/ogg', 'audio/webm', 'audio/x-midi', 'audio/midi', 'audio/x-ms-wma', 'audio/x-m4a', 'audio/flac', 'audio/aac', 'audio/webm', 'audio/wave']",
