@@ -4,13 +4,13 @@ module.exports = {
   port: process.env.PORT || '5000',
   repoBranch: process.env.REPO_BRANCH || 'main', // Replace or not
   githubRepo: process.env.GITHUB_REPO || 'bmb-upload', // Your storage repo name
-  commitMessage: process.env.COMMIT_MESSAGE || 'Github Cdn:Upload', // Your commit Message
+  commitMessage: process.env.COMMIT_MESSAGE || 'Bmb Cdn:Upload', // Your commit Message
   githubUser: process.env.GITHUB_USERNAME || 'novaxmd', // Yout github username
   githubApiUrl: process.env.GITHUB_API_URL || 'https://api.github.com', // Maintain this
   cdnApiUrl: process.env.CDN_API_URL || 'https://cdn.jsdelivr.net/gh', // Maintain this
   cfTurnstileApiUrl: process.env.CF_TURNSTILE_API_URL || "https://challenges.cloudflare.com", // Mintain this
-  cfSecretKey: process.env.CF_TURNSTILE_SECRET_KEY || '0x4AAAAAACyKoqk3ZYrgHN4aFxldvAnPf48', // Use yours
-  githubToken: process.env.GITHUB_TOKEN || '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', // Your Github Token Here
+  cfSecretKey: process.env.CF_TURNSTILE_SECRET_KEY || '', // Use yours
+  githubToken: process.env.GITHUB_TOKEN || '', // Your Github Token Here
   imageMimetypes: process.env.IMAGE_MIMETYPES || "['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml', 'image/avif', 'image/heif', 'image/heic', 'image/x-icon', 'image/tiff']",
   audioMimetypes: process.env.AUDIO_MIMETYPES || "['audio/mp3', 'audio/mp4', 'audio/mpeg', 'audio/wav', 'audio/ogg', 'audio/webm', 'audio/x-midi', 'audio/midi', 'audio/x-ms-wma', 'audio/x-m4a', 'audio/flac', 'audio/aac', 'audio/webm', 'audio/wave']",
   videoMimetypes: process.env.VIDEO_MIMETYPES || "['video/mp4', 'video/webm', 'video/quicktime', 'video/x-msvideo', 'video/avi', 'video/mpeg', 'video/x-ms-wmv', 'video/3gpp2', 'video/3gpp', 'video/x-matroska', 'video/ogg']",
